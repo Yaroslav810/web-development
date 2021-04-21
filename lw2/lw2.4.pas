@@ -4,15 +4,16 @@ USES
    
 FUNCTION GetQueryStringParameter(Key: STRING): STRING;
 VAR
-  FirstPosition, I: INTEGER;
+  FirstPosition, I, KeyPosition: INTEGER;
   QueryString, ResultString: STRING;
 BEGIN { GetQueryStringParameter }
   QueryString := GetEnv('QUERY_STRING');
   ResultString := '';
-  IF POS(CONCAT(Key, '='), QueryString) <> 0
+  KeyPosition := POS(CONCAT(Key, '='), QueryString);
+  IF KeyPosition <> 0
   THEN
     BEGIN
-      FirstPosition := POS(CONCAT(Key, '='), QueryString) + LENGTH(Key) + 1;
+      FirstPosition := KeyPosition + LENGTH(Key) + 1;
       FOR I := FirstPosition TO LENGTH(QueryString)
       DO
         BEGIN
