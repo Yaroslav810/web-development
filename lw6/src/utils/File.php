@@ -37,13 +37,43 @@ class File
         return $data;
     }
 
-    public function setDataByEmail(string $email): void
+    public function trySaveUserByEmail(User $user): bool
     {
-        //
+        if (!is_dir(self::DIR))
+        {
+            mkdir(self::DIR);
+        }
+
+        $filePath = self::DIR . mb_strtolower($user->getEmail()) . '.txt';
+        $userInfo = $user->getUser();
+        if (!self::trySetDataToFile($filePath, $userInfo))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public function getError(): string
     {
         return $this->error;
+    }
+
+    private function trySetDataToFile(string $filePath, array $user): bool
+    {
+        $fileDescriptor = fopen($filePath, 'w');
+        if (!$fileDescriptor)
+        {
+            return false;
+        }
+
+        foreach ($user as $key => $userInfo)
+        {
+            $userInfo = str_replace("\r\n", '\n', $userInfo);
+            fwrite($fileDescriptor, $key . ': ' . $userInfo . PHP_EOL);
+        }
+        fclose($fileDescriptor);
+
+        return true;
     }
 }

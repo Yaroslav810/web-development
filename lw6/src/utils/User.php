@@ -16,17 +16,17 @@ class User
         $this->message = $message;
     }
 
-    public function getUser(): ?array
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getUser(): array
     {
         $name = $this->name;
         $email = $this->email;
         $subject = $this->subject;
         $message = $this->message;
-
-        if (empty($name) && empty($email) && empty($subject) && empty($message))
-        {
-            return null;
-        }
 
         $user = [
             'name' => $name,

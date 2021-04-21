@@ -3,5 +3,5 @@
 
 abstract class Page
 {
-    public function renderPage(): void {}
+    abstract public function renderPage(): void;
 }

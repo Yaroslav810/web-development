@@ -6,7 +6,6 @@ class FeedbacksListPage extends Page
 {
     const EMPTY_FIELD = 'An empty search query is specified!';
 
-
     private $email;
 
     public function __construct()
@@ -17,6 +16,7 @@ class FeedbacksListPage extends Page
     public function renderPage(): void
     {
         $template = new Template('feedbacks');
+
         if (is_null($this->email))
         {
             $template->renderTemplate();
