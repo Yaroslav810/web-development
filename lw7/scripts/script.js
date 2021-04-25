@@ -1,13 +1,26 @@
 function isPrimeNumber(n)
 {
-  if (typeof n === 'number' && !isNaN(n))
+  if (isInteger(n))
   {
     checkPrime(n);
+    return;
   }
-  else
+
+  if (Array.isArray(n))
   {
-    console.log(n + " не число");
+    let checkOnNumber = n.every(isNumber) && n.length > 0;
+    if (checkOnNumber)
+    {
+      n.forEach((item) => checkPrime(item))
+    }
+    else
+    {
+      console.log('The array must not be empty and consist only of numbers');
+    }
+    return;
   }
+
+  console.log('Invalid data');
 }
 
 function checkPrime(n)
@@ -22,9 +35,17 @@ function checkPrime(n)
       }
     }
   }
-  if (isPrime) {
+  if ((isPrime) && (n > 1)) {
     console.log('Result: ' + n + ' is prime number')
   } else {
     console.log('Result: ' + n + ' is not prime number')
   }
+}
+
+function isNumber(n) {
+  return (typeof n === 'number' && !isNaN(n));
+}
+
+function isInteger(n) {
+  return Number.isInteger(n);
 }
