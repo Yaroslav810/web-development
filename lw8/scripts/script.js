@@ -16,8 +16,8 @@ const run = () => {
     prev: document.querySelector('.header__arrow .arrow__left'),
     next: document.querySelector('.header__arrow .arrow__right'),
   }
-  buttons.next.addEventListener("click", () => swapSlide("right", checkSlide))
-  buttons.prev.addEventListener("click", () => swapSlide("left", checkSlide));
+    buttons.next.addEventListener("click", () => swapSlide("right", checkSlide))
+    buttons.prev.addEventListener("click", () => swapSlide("left", checkSlide));
 
   window.addEventListener("resize", () => {
     calculateSlider();
@@ -50,10 +50,10 @@ const swapSlide = (direction, check) => {
 
   slider.style.transition = ".3s ease-in-out";
   slider.style.transform = "translate(" + -sliderIndex * (sliderItemWidth) + "px, 0)";
-  setTimeout(() => {
+  slider.addEventListener('transitionend', function() {
     slider.style.transition = '';
     check(direction);
-  }, 300);
+  })
 
   changeBackground();
 }
