@@ -1,3 +1,5 @@
+let header;
+let headerClassList;
 let slider;
 let sliderItems = [];
 let sliderIndex;
@@ -5,6 +7,8 @@ let sliderItemWidth;
 let sliderWidth;
 
 const run = () => {
+  header = document.querySelector('.header');
+  headerClassList = header.className;
   slider = document.querySelector('.slider');
   sliderItems = slider.querySelectorAll('.slider__item');
   slider.appendChild(sliderItems[0].cloneNode(true));
@@ -24,6 +28,7 @@ const run = () => {
   });
 
   calculateSlider();
+  changeBackground();
 }
 
 const checkSlide = (direction) => {
@@ -71,28 +76,13 @@ const calculateSlider = () => {
 }
 
 const changeBackground = () => {
-  const header = document.querySelector('.header');
   const currentSlide = sliderItems[sliderIndex];
-  switch (currentSlide.id) {
-    case ('hogwarts'):  {
-      header.style.backgroundImage = 'url("./images/background-hogwarts.png")';
-      break;
-    }
-    case ('casino'): {
-      header.style.backgroundImage = "url('./images/background-city.png')";
-      break;
-    }
-    case ('jordan'): {
-      header.style.backgroundImage = "url('./images/background-jordan.png')";
-      break;
-    }
-    case ('russia'): {
-      header.style.backgroundImage = "url('./images/background-russia.png')";
-      break;
-    }
-    default:
-      header.style.background = "";
-      break;
+
+  header.className = headerClassList;
+  const currentSlideId = currentSlide.id;
+  if (currentSlideId)
+  {
+    header.classList.add('background_' + currentSlideId);
   }
 }
 

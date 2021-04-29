@@ -44,6 +44,22 @@
     background: url('../images/background-overlay.png') top center/cover no-repeat;
 }
 
+.background_hogwarts {
+    background-image: url('../images/background-hogwarts.png');
+}
+
+.background_casino {
+    background-image: url('../images/background-city.png');
+}
+
+.background_jordan {
+    background-image: url('../images/background-jordan.png');
+}
+
+.background_russia {
+    background-image: url('../images/background-russia.png');
+}
+
 .header__top {
     width: 100%;
     padding: 10px;
