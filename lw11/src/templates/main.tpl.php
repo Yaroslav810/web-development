@@ -220,7 +220,7 @@
         <?php if (isset($this->args['is_save']) && $this->args['is_save']): ?>
           <div class="contact__success">
             <div class="contact__success-image">
-              <img src="./../../web/images/success.jpg" alt="success">
+              <img src="/images/success.jpg" alt="success">
             </div>
             <p class="contact__success-text">
               Data saved successfully!

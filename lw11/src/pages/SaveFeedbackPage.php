@@ -6,7 +6,7 @@
 // и должен рендериться шаблон main с информацией о том
 // что данные сохранены
 require_once __DIR__ . '/Page.php';
-require_once __DIR__ . './../utils/File.php';
+require_once __DIR__ . './../utils/Database.php';
 require_once __DIR__ . './../utils/User.php';
 
 class SaveFeedbackPage extends Page
@@ -41,8 +41,8 @@ class SaveFeedbackPage extends Page
             return;
         }
 
-        $file = new File();
-        if (!$file->trySaveUserByEmail($this->user))
+        $database = new Database();
+        if ($database->trySaveFeedback($this->user->getUser()))
         {
             $template->setArgs(array_merge($this->user->getUser(), ['is_save' => false]));
             $template->renderTemplate();

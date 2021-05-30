@@ -1,10 +1,10 @@
 <?php
-    define("ALL_CHARACTERS", 4);
-    define("DIGIT_WEIGHT", 4);
-    define("UPPERCASE_WEIGHT", 2);
-    define("LOWERCASE_WEIGHT", 2);
+    const CHARACTER_WEIGHT = 4;
+    const DIGIT_WEIGHT = 4;
+    const UPPERCASE_WEIGHT = 2;
+    const LOWERCASE_WEIGHT = 2;
 
-    define("DIR", "./data/");
+    const DIR = "./data/";
 
     function getPasswordStrength(?string $password): ?int
     {
@@ -21,7 +21,7 @@
         }
 
         $strength = 0;
-        $strength = $strength + mb_strlen($password) * ALL_CHARACTERS;
+        $strength = $strength + mb_strlen($password) * CHARACTER_WEIGHT;
 
         $strength = $strength + (preg_match_all("/\d/", $password)) * DIGIT_WEIGHT;
 

@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS bino CHAR SET utf8;
+
+CREATE TABLE `feedback`(
+    `feedback_id` SERIAL PRIMARY KEY,
+    `name` NVARCHAR(256) NOT NULL,
+    `email` NVARCHAR(256) NOT NULL,
+    `subject` NVARCHAR(256) NOT NULL,
+    `message` NVARCHAR(512) NOT NULL
+);

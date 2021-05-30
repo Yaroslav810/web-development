@@ -217,74 +217,74 @@
       </ul>
     </div>
     <div class="contact__block">
-        <?php if (isset($this->args['is_save']) && $this->args['is_save']): ?>
-          <div class="contact__success">
-            <div class="contact__success-image">
-              <img src="./../../web/images/success.jpg" alt="success">
-            </div>
-            <p class="contact__success-text">
-              Data saved successfully!
-            </p>
+      <?php if (isset($this->args['is_save']) && $this->args['is_save']): ?>
+        <div class="contact__success">
+          <div class="contact__success-image">
+            <img src="./../../web/images/success.jpg" alt="success">
           </div>
-        <?php else: ?>
-          <form class="contact__form" method="post">
-              <?php if (isset($this->args['is_save']) && !$this->args['is_save']): ?>
-                <p class="form-error">Unknown error! Please try again later!</p>
+          <p class="contact__success-text">
+            Data saved successfully!
+          </p>
+        </div>
+      <?php else: ?>
+        <form class="contact__form" method="post">
+          <?php if (isset($this->args['is_save']) && !$this->args['is_save']): ?>
+            <p class="form-error">Unknown error! Please try again later!</p>
+          <?php endif; ?>
+          <div class="form-row">
+            <input
+                    type="text"
+                    id="formName"
+                    name="name"
+                    class="form-field"
+                    placeholder="Name"
+                    value="<?php echo $this->args['name'] ?? ''; ?>"
+            />
+              <?php if (isset($this->args['name_error_msg'])): ?>
+                <p class="form-error"><?php echo $this->args['name_error_msg']; ?></p>
               <?php endif; ?>
-            <div class="form-row">
-              <input
-                      type="text"
-                      id="formName"
-                      name="name"
-                      class="form-field"
-                      placeholder="Name"
-                      value="<?php echo $this->args['name'] ?? ''; ?>"
-              />
-                <?php if (isset($this->args['name_error_msg'])): ?>
-                  <p class="form-error"><?php echo $this->args['name_error_msg']; ?></p>
-                <?php endif; ?>
-            </div>
-            <div class="form-row">
-              <input
-                      type="email"
-                      id="formEmail"
-                      name="email"
-                      class="form-field"
-                      placeholder="Email"
-                      value="<?php echo $this->args['email'] ?? ''; ?>"
-              />
-                <?php if (isset($this->args['email_error_msg'])): ?>
-                  <p class="form-error"><?php echo $this->args['email_error_msg']; ?></p>
-                <?php endif; ?>
-            </div>
-            <div class="form-row">
-              <input
-                      type="text"
-                      id="formSubject"
-                      name="subject"
-                      class="form-field"
-                      placeholder="Subject"
-                      value="<?php echo $this->args['subject'] ?? ''; ?>"
-              />
-                <?php if (isset($this->args['subject_error_msg'])): ?>
-                  <p class="form-error"><?php echo $this->args['subject_error_msg']; ?></p>
-                <?php endif; ?>
-            </div>
-            <div class="form-row">
+          </div>
+          <div class="form-row">
+            <input
+                    type="email"
+                    id="formEmail"
+                    name="email"
+                    class="form-field"
+                    placeholder="Email"
+                    value="<?php echo $this->args['email'] ?? ''; ?>"
+            />
+              <?php if (isset($this->args['email_error_msg'])): ?>
+                <p class="form-error"><?php echo $this->args['email_error_msg']; ?></p>
+              <?php endif; ?>
+          </div>
+          <div class="form-row">
+            <input
+                    type="text"
+                    id="formSubject"
+                    name="subject"
+                    class="form-field"
+                    placeholder="Subject"
+                    value="<?php echo $this->args['subject'] ?? ''; ?>"
+            />
+              <?php if (isset($this->args['subject_error_msg'])): ?>
+                <p class="form-error"><?php echo $this->args['subject_error_msg']; ?></p>
+              <?php endif; ?>
+          </div>
+          <div class="form-row">
           <textarea
                   name="message"
                   class="form-textarea"
                   placeholder="Message"
           ><?php echo $this->args['message'] ?? ''; ?></textarea>
-                <?php if (isset($this->args['message_error_msg'])): ?>
-                  <p class="form-error"><?php echo $this->args['message_error_msg']; ?></p>
-                <?php endif; ?>
-            </div>
-            <div class="form-row">
-              <button class="form-button button">Send message</button>
-            </div>
-          </form>
-        <?php endif; ?>
+              <?php if (isset($this->args['message_error_msg'])): ?>
+                <p class="form-error"><?php echo $this->args['message_error_msg']; ?></p>
+              <?php endif; ?>
+          </div>
+          <div class="form-row">
+            <button class="form-button button">Send message</button>
+          </div>
+        </form>
+      <?php endif; ?>
     </div>
   </div>
 </section>

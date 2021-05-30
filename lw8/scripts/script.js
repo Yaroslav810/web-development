@@ -1,89 +1,98 @@
-let header;
-let headerClassList;
-let slider;
-let sliderItems = [];
-let sliderIndex;
-let sliderItemWidth;
-let sliderWidth;
+class Slider {
+  constructor() {
+    this.header;
+    this.headerClassList;
+    this.slider;
+    this.sliderItems = [];
+    this.sliderIndex;
+    this.sliderItemWidth;
+    this.sliderWidth;
+  }
+
+  run = () => {
+    this.header = document.querySelector('.header');
+    this.headerClassList = this.header.className;
+    this.slider = document.querySelector('.slider');
+    this.sliderItems = this.slider.querySelectorAll('.slider__item');
+    this.slider.appendChild(this.sliderItems[0].cloneNode(true));
+    this.slider.insertBefore(this.sliderItems[this.sliderItems.length - 1].cloneNode(true), this.sliderItems[0]);
+    this.sliderItems = this.slider.querySelectorAll('.slider__item');
+    this.sliderIndex = 1;
+
+    const buttons = {
+      prev: document.querySelector('.header__arrow .arrow__left'),
+      next: document.querySelector('.header__arrow .arrow__right'),
+    }
+    buttons.next.addEventListener("click", () => this.swapSlide("right", this.checkSlide))
+    buttons.prev.addEventListener("click", () => this.swapSlide("left", this.checkSlide));
+
+    window.addEventListener("resize", () => {
+      this.calculateSlider();
+    });
+
+    this.calculateSlider();
+    this.changeBackground();
+  }
+
+  checkSlide = (direction) => {
+    if (direction === "right" && (this.sliderIndex + 1) === this.sliderItems.length) {
+      this.sliderIndex = 1;
+    }
+
+    if (direction === "left" && (this.sliderIndex === 0)) {
+      this.sliderIndex = this.sliderItems.length - 2;
+    }
+
+    this.slider.style.transform = "translate(" + -this.sliderIndex * (this.sliderItemWidth) + "px, 0)";
+  }
+
+  swapSlide = (direction, check) => {
+
+    if (direction === "right") {
+      this.sliderIndex = (this.sliderIndex + 1) % this.sliderItems.length;
+    }
+
+    if (direction === "left") {
+      this.sliderIndex = (this.sliderIndex - 1) % this.sliderItems.length;
+    }
+
+    this.slider.style.transition = ".3s ease-in-out";
+    this.slider.style.transform = "translate(" + -this.sliderIndex * (this.sliderItemWidth) + "px, 0)";
+    this.slider.addEventListener('transitionend', function() {
+      this.slider.style.transition = '';
+      check(direction);
+    }.bind(this));
+
+    this.changeBackground();
+  }
+
+  calculateSlider = () => {
+    this.slider.style.width = "";
+    this.sliderItemWidth = this.slider.clientWidth;
+    this.sliderWidth = this.sliderItemWidth * this.sliderItems.length;
+
+    this.slider.style.width = this.sliderWidth + 'px';
+    this.slider.style.transform = "translate(" + -this.sliderIndex * (this.sliderItemWidth) + "px, 0)";
+    this.sliderItems.forEach((item) => {
+      item.style.width = this.sliderItemWidth + 'px';
+    });
+  }
+
+  changeBackground = () => {
+    const currentSlide = this.sliderItems[this.sliderIndex];
+
+    this.header.className = this.headerClassList;
+    const currentSlideId = currentSlide.id;
+    if (currentSlideId)
+    {
+      this.header.classList.add('background_' + currentSlideId);
+    }
+  }
+}
 
 const run = () => {
-  header = document.querySelector('.header');
-  headerClassList = header.className;
-  slider = document.querySelector('.slider');
-  sliderItems = slider.querySelectorAll('.slider__item');
-  slider.appendChild(sliderItems[0].cloneNode(true));
-  slider.insertBefore(sliderItems[sliderItems.length - 1].cloneNode(true), sliderItems[0]);
-  sliderItems = slider.querySelectorAll('.slider__item');
-  sliderIndex = 1;
-
-  const buttons = {
-    prev: document.querySelector('.header__arrow .arrow__left'),
-    next: document.querySelector('.header__arrow .arrow__right'),
-  }
-    buttons.next.addEventListener("click", () => swapSlide("right", checkSlide))
-    buttons.prev.addEventListener("click", () => swapSlide("left", checkSlide));
-
-  window.addEventListener("resize", () => {
-    calculateSlider();
-  });
-
-  calculateSlider();
-  changeBackground();
-}
-
-const checkSlide = (direction) => {
-  if (direction === "right" && (sliderIndex + 1) === sliderItems.length) {
-    sliderIndex = 1;
-  }
-
-  if (direction === "left" && (sliderIndex === 0)) {
-    sliderIndex = sliderItems.length - 2;
-  }
-
-  slider.style.transform = "translate(" + -sliderIndex * (sliderItemWidth) + "px, 0)";
-}
-
-const swapSlide = (direction, check) => {
-
-  if (direction === "right") {
-    sliderIndex = (sliderIndex + 1) % sliderItems.length;
-  }
-
-  if (direction === "left") {
-    sliderIndex = (sliderIndex - 1) % sliderItems.length;
-  }
-
-  slider.style.transition = ".3s ease-in-out";
-  slider.style.transform = "translate(" + -sliderIndex * (sliderItemWidth) + "px, 0)";
-  slider.addEventListener('transitionend', function() {
-    slider.style.transition = '';
-    check(direction);
-  })
-
-  changeBackground();
-}
-
-const calculateSlider = () => {
-  slider.style.width = "";
-  sliderItemWidth = slider.clientWidth;
-  sliderWidth = sliderItemWidth * sliderItems.length;
-
-  slider.style.width = sliderWidth + 'px';
-  slider.style.transform = "translate(" + -sliderIndex * (sliderItemWidth) + "px, 0)";
-  sliderItems.forEach((item) => {
-    item.style.width = sliderItemWidth + 'px';
-  });
-}
-
-const changeBackground = () => {
-  const currentSlide = sliderItems[sliderIndex];
-
-  header.className = headerClassList;
-  const currentSlideId = currentSlide.id;
-  if (currentSlideId)
-  {
-    header.classList.add('background_' + currentSlideId);
-  }
+  const slider = new Slider();
+  slider.run();
 }
 
 window.onload = run;
